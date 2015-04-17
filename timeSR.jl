@@ -1,9 +1,8 @@
 include ("SR.jl")
 
-
 using TimeIt
 
-function PrintErro (f)
+function timeSR (f)
 
   for (a, b) = [(0, 1), (0, 10), (-1, 1), (-10, 10)]
 
@@ -26,34 +25,34 @@ function PrintErro (f)
 f(x) = 1
  println ("Tempo para f(x) = 1
           ")
- PrintErro (f)
+ timeSR (f)
 #
 f(x) = x
  println ("
  Tempo para f(x) = x
           ")
- PrintErro (f)
+ timeSR (f)
 #
 f(x) = x^2
  println ("
  Tempo para f(x): = x^2
           ")
- PrintErro (f)
+ timeSR (f)
 #
 f(x) = x^3
  println ("
  Tempo para f(x) = x^3
           ")
- PrintErro (f)
+ timeSR (f)
 #
 f(x) = x^4
  println ("
  Tempo para f(x) = x^4
           ")
- PrintErro (f)
+ timeSR (f)
 #
 f(x) = e^x
  println ("
  Tempo para f(x) = e^x
           ")
- PrintErro (f)
+ timeSR (f)
