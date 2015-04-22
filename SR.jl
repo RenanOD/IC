@@ -4,33 +4,21 @@ function SR (f, a, b, n)
 
     n += 1
 
-    end
-  
-  aprox = (f(a) + f(b))
-
+  end
   
   h = (b-a)/n
 
+  aprox = (f(a) + f(b) + 4f(a+h))
 
-  for (i=2:2:n-1)
+  for i=2:2:n-1
 
     x = a + i*h
 
-    aprox += 2f(x)
+    aprox += 2f(x) + 4f(x+h)
     
-    end
-
-
-  for (i=1:2:n-1)
-
-    x = a + i*h
-
-    aprox += 4f(x)
-
-    end
-
+  end
 
   return aprox*(h/3)
 
 
-  end
+end
