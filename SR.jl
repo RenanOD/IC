@@ -11,5 +11,4 @@ function SR (f, a, b, n)
   end
   return aprox*(h/3)
 
-
 end
