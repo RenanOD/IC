@@ -16,9 +16,9 @@ function printError (f, g, spacing, intervals)
   end
 end
 
+spacing = [2, 10, 100, 1000]
+intervals = [0 1; 0 10; -1 1; -10 10]
 for g = [TR, SR]
-  spacing = [2, 10, 100, 1000]
-  intervals = [0 1; 0 10; -1 1; -10 10]
 
   f(x) = 1
   println ("\n \n Time for f(x) = 1 ($g) \n")
