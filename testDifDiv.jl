@@ -1,162 +1,76 @@
-include ("errorDifDiv.jl")
-
-println ("Erro para f(x)= x^2:")
-
-  f(x)=x^2
-
-  println ("\n Dados dois pontos:")
-
-    X=[2, 8]
-    Y=[4, 64]
-
-    pontos=[3:7]
-
-    errorDifDiv(f,pontos,X,Y)
- 
-  println ("\n Dados tres pontos:")
-
-    X=[2, 8, 9]
-    Y=[4, 64, 81]
-
-    pontos=[3:7]
-
-    errorDifDiv(f,pontos,X,Y)
+include ("getDistance.jl")
 
 
-println ("\n \n Erro para f(x)= x^3:")
+println("\n f(x)= x^3, interval: [0,5] \n")
+
+  (a, b) = (0,5) 
+  nvalues=[10:10:100]
 
   f(x)=x^3
 
-  println ("\n Dados dois pontos:")
+  for n=nvalues
 
-    X=[2, 8]
-    Y=[8, 512]
+    distance = getDistance(a,b,n,f)
+    println ("Max. error for n=$n: $distance ")
+  end
 
-    pontos=[3:7]
+println("\n f(x)= x^(1/2), interval: [0,5] \n")
 
-    errorDifDiv(f,pontos,X,Y)
+  (a, b) = (0,5) 
+
+  f(x)=x^(1/2)
  
-  println ("\n Dados tres pontos:")
+  for n=nvalues
 
-    X=[2, 8, 9]
-    Y=[4, 512, 729]
+    distance = getDistance(a,b,n,f)
+    println ("Max. error for n=$n: $distance")
+  end
 
-    pontos=[3:7]
+println("\n f(x)= e^x, interval: [0,3] \n")
 
-    errorDifDiv(f,pontos,X,Y)
-
-  println ("\n Dados quatro pontos:")
-
-    X=[2, 8, 9, 10]
-    Y=[8, 512, 729, 1000]
-
-    pontos=[3:7]
-
-    errorDifDiv(f,pontos,X,Y)
-
-
-println ("\n \n Erro para f(x)= sen(x): \n")
-
-  f(x)=sin(x)
-
-  println ("\n Dados dois pontos:")
-
-    X=[pi/5, pi/4]
-    Y=[sin(pi/5), sin(pi/4)]
-
-    pontos=[0, 3pi/18, 3pi/9, pi/2, pi]
-
-    errorDifDiv(f,pontos,X,Y)
- 
-  println ("\n Dados tres pontos:")
-
-    X=[pi/5, pi/4, pi/3]
-    Y=[sin(pi/5), sin(pi/4), sin(pi/3)]
-
-    pontos=[0, 3pi/18, 3pi/9, pi/2, pi]
-
-    errorDifDiv(f,pontos,X,Y)
-
-
-  println ("\n Dados quatro pontos:")
-
-
-    X=[pi/5, pi/4, pi/3, pi/2]
-    Y=[sin(pi/5), sin(pi/4), sin(pi/3), sin(pi/2)]
-
-    pontos=[0, 3pi/18, 3pi/9, pi/2, pi]
-
-    errorDifDiv(f,pontos,X,Y)
-
-  println ("\n Dados cinco pontos:")
-
-
-    X=[pi/5, pi/4, pi/3, pi/2, 2pi/3]
-    Y=[sin(pi/5), sin(pi/4), sin(pi/3), sin(pi/2), sin(2pi/3)]
-
-    pontos=[0, 3pi/18, 3pi/9, pi/2, pi]
-
-    errorDifDiv(f,pontos,X,Y)
-
-  println ("\n Dados seis pontos:")
-
-
-    X=[pi/5, pi/4, pi/3, pi/2, 2pi/3, 3pi/5]
-    Y=[sin(pi/5), sin(pi/4), sin(pi/3), sin(pi/2), sin(2pi/3), sin(3pi/5)]
-
-    pontos=[0, 3pi/18, 3pi/9, pi/2, pi]
-
-    errorDifDiv(f,pontos,X,Y)
-
-  println ("\n Dados sete pontos:")
-
-
-    X=[pi/5, pi/4, pi/3, pi/2, 2pi/3, 3pi/5, 8pi/9]
-    Y=[sin(pi/5), sin(pi/4), sin(pi/3), sin(pi/2), sin(2pi/3), sin(3pi/5), sin(8pi/9)]
-
-    pontos=[0, 3pi/18, 3pi/9, pi/2, pi]
-
-    errorDifDiv(f,pontos,X,Y)
-
-println ("\n \n Erro para f(x)= e^x:")
+  (a, b) = (0,3) 
 
   f(x)=e^x
-
-  println ("\n Dados dois pontos:")
-
-    X=[2, 8]
-    Y=[e^2, e^8]
-
-    pontos=[3:7]
-
-    errorDifDiv(f,pontos,X,Y)
  
-  println ("\n Dados tres pontos:")
+  for n=nvalues
 
-    X=[2, 8, 9]
-    Y=[e^2, e^8, e^9]
+    distance = getDistance(a,b,n,f)
+    println ("Max. error for n=$n: $distance")
+  end
 
-    pontos=[3:7]
+println("\n f(x)= cos(x), interval: [0,2*pi] \n")
 
-    errorDifDiv(f,pontos,X,Y)
+(a, b) = (0,2*pi) 
 
-  println ("\n Dados quatro pontos:")
+f(x)=cos(x)
+ 
+  for n=nvalues
 
-    X=[2, 8, 9, 10]
-    Y=[e^2, e^8, e^9, e^10]
+    distance = getDistance(a,b,n,f)
+    println ("Max. error for n=$n: $distance")
+  end
 
-    pontos=[3:7]
+println("\n f(x)= sin(x+2.8*cos(x), interval: [0,2*pi] \n")
 
-    errorDifDiv(f,pontos,X,Y)
+(a, b) = (0,2*pi) 
 
-  println ("\n Dados cinco pontos:")
+f(x)=sin(x+2.8*cos(x))
 
-    X=[2, 8, 9, 10, 11]
-    Y=[e^2, e^8, e^9, e^10, e^11]
+  for n=nvalues
 
-    pontos=[3:7]
+    distance = getDistance(a,b,n,f)
+    println ("Max. error for n=$n: $distance ")
+  end
 
-    errorDifDiv(f,pontos,X,Y)
+println("\n f(x)= 1/(1+25x^2), interval: [-1,1] \n")
 
+(a, b) = (-1,1) 
 
+f(x)=1/(1+25x^2)
+
+  for n=nvalues
+
+    distance = getDistance(a,b,n,f)
+    println ("Max. error for n=$n: $distance ")
+  end
 
