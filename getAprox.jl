@@ -1,8 +1,5 @@
-include ("difdiv.jl")
+function getAprox(point, X, Y, C)
 
-function getAprox(point, X, Y)
-
-  C=difdiv(X,Y)
   j=length(X)
   p=C[1]
 
@@ -13,7 +10,7 @@ function getAprox(point, X, Y)
       difX*=(point-X[k])
     end
 
-  p+=difX*C[i+1]
+    p+=difX*C[i+1]
   end
   return p
 end
