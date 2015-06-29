@@ -1,7 +1,7 @@
 include ("SRA.jl")
 
-N=100
-tol=0.000005
+N=25
+tol=1e-6
 
 println ("Error tolerance: $tol \n")
 
@@ -26,5 +26,11 @@ println ("Error for f(x)=e^t*cos(t) from $a to $b: $error \n")
 f(t)=atan((2+t^2)^(1/2))/((1+t^2)*(2+t^2)^(1/2))
 (a,b)=(0,1)
 integral=5*pi^2/96
+error=integral-SRA(f,a,b,tol,N)
+println ("Error for f(x)=arctan((2+t^2)^(1/2))/((1+t^2)*(2+t^2)^(1/2)) from $a to $b: $error \n")
+
+f(t)=1/(1+25t^2)
+(a,b)=(-1,1)
+integral=atan(5)/5-atan(-5)/5
 error=integral-SRA(f,a,b,tol,N)
 println ("Error for f(x)=arctan((2+t^2)^(1/2))/((1+t^2)*(2+t^2)^(1/2)) from $a to $b: $error \n")

@@ -4,7 +4,7 @@ function SRA (f,a,b,tol,N)
 
 Va=fill(1.0,2N); Vb=fill(1.0,2N);
 
-i=1; approx=0; Va[i]=a; Vb[i]=b;
+i=1; approx=0; Va[i]=a; Vb[i]=b; m=0;
 
 while i>0
 
@@ -17,8 +17,8 @@ while i>0
     approx+=S2
   else
     if ((b-a)/(btemp-atemp)>N)
-      println ("Limite de subintervalos excedido.")
-      return 0
+      approx+=S2
+      m=1;
     else
       i+=1
       Va[i]=btemp-htemp; Vb[i]=btemp;
@@ -26,6 +26,9 @@ while i>0
       Va[i]=atemp; Vb[i]=btemp-htemp;
     end
   end
+end
+if m==1
+  println ("Limite de subintervalos excedido")
 end
 return approx
 end
