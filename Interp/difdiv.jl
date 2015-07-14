@@ -4,15 +4,15 @@ function difdiv(X,Y)
   X=X*1.0
   Y=Y*1.0
   C=copy(Y)
-  ordem=copy(Y)
+  order=copy(Y)
 
   for i=[1:j-1]
 
     for p=[1:j-i]
-      ordem[p]=(ordem[p+1]-ordem[p])/(X[p+i]-X[p])
+      order[p]=(order[p+1]-order[p])/(X[p+i]-X[p])
     end
     
-    C[i+1]=ordem[1]
+    C[i+1]=order[1]
   end
   return C
 end

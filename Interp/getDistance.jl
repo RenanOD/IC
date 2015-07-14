@@ -1,5 +1,5 @@
-include ("getAprox.jl")
-include ("difdiv.jl")
+include ("Interp/getApprox.jl")
+include ("Interp/difdiv.jl")
 
 function getDistance (a, b, n, f)
 
@@ -14,7 +14,7 @@ function getDistance (a, b, n, f)
   y=[1.0:100]; z=[1.0:100];
 
   for i=[1:n]
-    y[i]=f(x[i]); z[i]=getAprox(x[i], X, Y, C);
+    y[i]=f(x[i]); z[i]=getApprox(x[i], X, Y, C);
     
     if (abs(y[i]-z[i])>distance)
       distance = abs(y[i]-z[i])

@@ -28,7 +28,7 @@ while i>0
   end
 end
 if m==1
-  println ("Limite de subintervalos excedido")
+  println ("The ammount of subintervals was exceeded")
 end
 return approx
 end

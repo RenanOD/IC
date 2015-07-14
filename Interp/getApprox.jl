@@ -1,4 +1,4 @@
-function getAprox(point, X, Y, C)
+function getApprox(point, X, Y, C)
 
   j=length(X)
   p=C[1]

@@ -1,4 +1,4 @@
-include ("SRA.jl")
+include ("SRA/SRA.jl")
 
 N=25
 tol=1e-6

@@ -1,7 +1,7 @@
-function printErrorQ2Gauss (f, a, b, integral)
+function printError_sinh_tanh(f,a,b,integral,n)
 
   exact=integral(b)-integral(a);
-  approx=Q2Gauss(f,a,b);
+  approx=sinh_tanh(f,a,b,n);
   error=exact-approx;
 
   println ("in the interval between $a e $b: $error")

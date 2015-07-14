@@ -1,4 +1,4 @@
-include ("getAprox.jl")
+include ("Interp/getApprox.jl")
 using PyPlot
 
 function plotG (a, b, n, f)
@@ -14,7 +14,7 @@ function plotG (a, b, n, f)
   y=[1.0:100]; z=[1.0:100];
 
   for i=[1:100]
-    y[i]=f(x[i]); z[i]=getAprox(x[i], X, Y, C);
+    y[i]=f(x[i]); z[i]=getApprox(x[i], X, Y, C);
   end
 
   plt.plot(x, y, x, z, linestyle="--")
