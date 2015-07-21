@@ -1,64 +1,71 @@
 include ("sinh_tanh/sinh_tanh.jl")
 include ("sinh_tanh/printError_sinh_tanh.jl")
 
-  n=8
+   n=10
 
-  println("\n Error for f(x)=3: ")
-  f(x)=3
-  integral(x)=3x
-    (a,b)=(-1,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(0,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(1,4)
-    printError_sinh_tanh(f,a,b,integral,n)
+f(t)=t*log(1+t)
+(a,b)=(0,1)
+integral=1/4
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.1 f(t)=t*log(1+t) from $a to $b: $error \n")
 
-  println("\n Error for f(x)=5x+1: ")
-  f(x)=5x + 1
-  integral(x)=(5/2)*x^2+x
-    (a,b)=(-1,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(0,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(1,4)
-    printError_sinh_tanh(f,a,b,integral,n)
+f(t)=t^2*atan(t)
+(a,b)=(0,1)
+integral=(pi-2+2log(2))/12
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.2 f(t)=t^2*arctan(t) from $a to $b: $error \n")
 
-  println("\n Error for f(x)=x^2-x: ")
-  f(x)=x^2-x
-    integral(x)=(1/3)*x^3-(1/2)*x^2
-    (a,b)=(-1,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(0,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(1,4)
-    printError_sinh_tanh(f,a,b,integral,n)
+f(t)=e^t*cos(t)
+(a,b)=(0,pi/2)
+integral=(e^(pi/2)-1)/2
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.3 f(t)=e^t*cos(t) from $a to $b: $error \n")
 
-  println("\n Error for f(x)=x^3+x^2: ")
-  f(x)=x^3+x^2
-    integral(x)=(1/4)*x^4+(1/3)*x^3
-    (a,b)=(-1,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(0,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(1,4)
-    printError_sinh_tanh(f,a,b,integral,n)
+f(t)=atan((2+t^2)^(1/2))/((1+t^2)*(2+t^2)^(1/2))
+(a,b)=(0,1)
+integral=5*pi^2/96
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.4 f(t)=arctan((2+t^2)^(1/2))/((1+t^2)*(2+t^2)^(1/2)) from $a to $b: $error \n")
 
-  println("\n Error for f(x)=x^4-4x^2+x: ")
-    f(x)=x^4-4x^2+x
-    integral(x)=(1/5)x^5-(1/3)*4x^3+(1/2)*x^2
-    (a,b)=(-1,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(0,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(1,4)
-    printError_sinh_tanh(f,a,b,integral,n)
+f(t)=(1-t^2)^(1/2)
+(a,b)=(0,1)
+integral=pi/4
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.6 f(t)=(1-t^2)^(1/2) from $a to $b: $error \n")
 
-  println("\n Error for f(x)=e^x: ")
-    f(x)=e^x
-    integral(x)=e^x
-    (a,b)=(-1,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(0,1)
-    printError_sinh_tanh(f,a,b,integral,n)
-    (a,b)=(1,4)
-    printError_sinh_tanh(f,a,b,integral,n)
+f(t)=log(cos(t))
+(a,b)=(0,pi/2)
+integral=-pi*log(2)/2
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.9 f(t)=log(cos(t)) from $a to $b: $error \n")
+
+f(t)=(tan(t))^(1/2)
+(a,b)=(0,pi/2)
+integral=pi*2^(1/2)/2
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.10 f(t)=(tan(t))^(1/2) from $a to $b: $error \n")
+
+f(t)=1/(1+t^2)
+(a,b)=(0,1e50)
+integral=pi/2
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.11 f(t)=1/(1+t^2) from $a to $b: $error \n")
+
+f(t)=e^(-t^2/2)
+(a,b)=(0,1e50)
+integral=pi^(1/2)
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.13 f(t)=e^(-t^2/2) from $a to $b: $error \n")
+
+f(t)=e^(-t)*cos(t)
+(a,b)=(0,1e50)
+integral=1/2
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.14 f(t)=e^(-t^2/2) from $a to $b: $error \n")
+
+f(t)=sin(t)/t
+(a,b)=(0,1e50)
+integral=pi/2
+error=integral-sinh_tanh(f,a,b,n)
+println ("Error for eq.14 f(t)=e^(-t^2/2) from $a to $b: $error \n")
+
