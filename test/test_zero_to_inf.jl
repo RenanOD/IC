@@ -1,4 +1,4 @@
-using IC
+using NumInt
 
    n=12
 

@@ -1,4 +1,4 @@
-using IC
+using NumInt
 
 f(x)=sin(x+2.8*cos(x))
 

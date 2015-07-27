@@ -1,4 +1,4 @@
-using IC
+using NumInt
 
   println("\n Error for f(x)=3: ")
   f(x)=3

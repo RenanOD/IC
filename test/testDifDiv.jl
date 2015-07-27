@@ -1,4 +1,4 @@
-using IC
+using NumInt
 
 println("\n f(x)= x^3, interval: [0,5] \n")
 

@@ -1,4 +1,4 @@
-using IC
+using NumInt
 
 spacing = [2, 10, 100, 1000]
 intervals = [0 1; 0 10; -1 1; -10 10]

@@ -1,4 +1,4 @@
-module IC
+module NumInt
 
 include ("sinh_tanh.jl")
 
