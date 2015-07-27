@@ -1,4 +1,4 @@
-include ("SRA/SRA.jl")
+using IC
 
 N=25
 tol=1e-6

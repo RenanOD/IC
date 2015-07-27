@@ -1,4 +1,4 @@
-include ("TR_and_SR/SR.jl")
+include ("SR.jl")
 
 function SRinf_well (f,a,b,n)
 

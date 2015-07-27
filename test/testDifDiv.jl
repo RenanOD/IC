@@ -1,5 +1,4 @@
-include ("Interp/getDistance.jl")
-include ("Interp/printDistance.jl")
+using IC
 
 println("\n f(x)= x^3, interval: [0,5] \n")
 

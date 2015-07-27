@@ -1,5 +1,4 @@
-include ("Q2Gauss/Q2Gauss.jl")
-include ("Q2Gauss/printErrorQ2Gauss.jl")
+using IC
 
   println("\n Error for f(x)=3: ")
   f(x)=3

@@ -1,7 +1,7 @@
-include ("TR_and_SR/TR.jl")
-include ("TR_and_SR/SR.jl")
+include ("TR.jl")
+include ("SR.jl")
 using TimeIt
-include ("TR_and_SR/printTime.jl")
+include ("printTime.jl")
 
 spacing = [2, 10, 100, 1000]
 intervals = [0 1; 0 10; -1 1; -10 10]

@@ -1,4 +1,4 @@
-include ("Interp/plotG.jl")
+using IC
 
 f(x)=sin(x+2.8*cos(x))
 

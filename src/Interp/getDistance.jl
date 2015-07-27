@@ -1,5 +1,5 @@
-include ("Interp/getApprox.jl")
-include ("Interp/difdiv.jl")
+include ("getApprox.jl")
+include ("difdiv.jl")
 
 function getDistance (a, b, n, f)
 

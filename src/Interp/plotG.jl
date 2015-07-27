@@ -1,4 +1,4 @@
-include ("Interp/getApprox.jl")
+include ("getApprox.jl")
 using PyPlot
 
 function plotG (a, b, n, f)
