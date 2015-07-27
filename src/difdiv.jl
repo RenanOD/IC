@@ -1,5 +1,6 @@
 function difdiv(X,Y)
 
+
   j=length(X)
   X=X*1.0
   Y=Y*1.0

@@ -22,7 +22,6 @@ include ("printErrorQ2Gauss.jl")
 include ("printError.jl")
 include ("printTime.jl")
 include ("SR.jl")
-include ("timeG.jl")
 include ("TR.jl")
 
 end

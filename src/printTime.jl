@@ -1,3 +1,5 @@
+using TimeIt
+
 function printTime (f, g, spacing, intervals)
 
   for i=1:1:size(intervals,1)
