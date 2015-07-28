@@ -1,3 +1,5 @@
+export SR
+
 function SR (f, a, b, n)
 
   if n%2!=0
