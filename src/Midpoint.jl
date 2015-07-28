@@ -1,3 +1,5 @@
+export Midpoint
+
 function Midpoint (f,a,b,n)
 
 h=(b-a)/n

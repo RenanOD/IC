@@ -1,3 +1,5 @@
+export printDistance
+
 function printDistance (a,b,nvalues,f)
 
   for n=nvalues

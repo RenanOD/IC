@@ -1,3 +1,5 @@
+export double_inf
+
 function double_inf (f,n)
 
 approx=0
