@@ -13,7 +13,7 @@ include ("zero_to_inf.jl")
 include ("difdiv.jl")
 include ("getApprox.jl")
 include ("getDistance.jl")
-include ("plotG.jl")
+#include ("plotG.jl")
 include ("printDistance.jl")
 
 include ("Q2Gauss.jl")

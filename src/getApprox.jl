@@ -1,3 +1,5 @@
+export getApprox
+
 function getApprox(point, X, Y, C)
 
   j=length(X)

@@ -1,4 +1,6 @@
-include ("SR.jl")
+include("SR.jl")
+
+export SRA
 
 function SRA (f,a,b,tol,N)
 

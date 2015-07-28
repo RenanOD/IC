@@ -1,3 +1,5 @@
+export sinh_tanh
+
 function sinh_tanh(f,a,b,n)
 
 s=2.0^n

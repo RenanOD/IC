@@ -1,3 +1,5 @@
+export printError
+
 function printError (integral, f, g, spacing, intervals)
 
   for i=[1:size(intervals,1)]

@@ -1,3 +1,5 @@
+export difdiv
+
 function difdiv(X,Y)
 
 

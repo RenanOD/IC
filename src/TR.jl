@@ -1,3 +1,5 @@
+export TR
+
 function TR (f, a, b, n)
 
   h = (b-a)/n
