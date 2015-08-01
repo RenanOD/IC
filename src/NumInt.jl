@@ -20,7 +20,7 @@ include ("Q2Gauss.jl")
 include ("printErrorQ2Gauss.jl")
 
 include ("printError.jl")
-include ("printTime.jl")
+#include ("printTime.jl")
 include ("SR.jl")
 include ("TR.jl")
 
