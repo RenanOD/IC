@@ -1,9 +1,9 @@
-export SR
-export TR
-export SRA
-export Q2Gauss
+export simpsons_rule
+export trapezoidal_rule
+export simpsons_rule_adapted
+export gaussian_quadrature
 
-function SR (f, a, b, n)
+function simpsons_rule (f, a, b, n)
   if n%2!=0
     n += 1
   end
@@ -16,7 +16,7 @@ function SR (f, a, b, n)
   return approx*(h/3)
 end
 
-function TR (f, a, b, n)
+function trapezoidal_rule (f, a, b, n)
   h = (b-a)/n
   approx = (f(a) + f(b))/2
   for i=[1:n-1]
@@ -26,7 +26,7 @@ function TR (f, a, b, n)
   return approx*h
 end
 
-function SRA (f,a,b,tol,N)
+function simpsons_rule_adapted (f,a,b,tol,N)
 Va=fill(1.0,2N); Vb=fill(1.0,2N);
 i=1; approx=0; Va[i]=a; Vb[i]=b; m=0;
 
@@ -57,7 +57,7 @@ end
 return approx
 end
 
-function Q2Gauss (f, a, b)
+function gaussian_quadrature (f, a, b)
   x(t)=(a+b+t*(b-a))/2
   t=sqrt(3)/3
   approx= (f(x(t)) + f(x(-t)))*(b-a)/2

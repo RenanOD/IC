@@ -1,6 +1,6 @@
 export zero_to_inf
 export double_inf
-export SR_inf_well
+export simpsons_rule_inf
 
 function zero_to_inf (f,n)
 approx=0
@@ -30,7 +30,7 @@ end
 return approx
 end
 
-function SR_inf_well (f,a,b,n)
+function simpsons_rule_inf (f,a,b,n)
   x(t)=1/t
   g(t)=f(x(t))/t^2
   approx=SR(g,1/b,1/a,n)
