@@ -6,9 +6,7 @@ function zero_to_inf (f,n)
 approx=0
 
 s=2.0^n
-
 h=4.5/2.0^n
-
 x(k)=e^(pi*sinh(k*h))
 w(k)=x(k)*pi*cosh(k*h)
 
