@@ -1,4 +1,5 @@
 using NumInt
+using Base.Test
 
 function test_precision(g,a,b,exact)
   approx=sinh_tanh(g,a,b,12)

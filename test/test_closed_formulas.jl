@@ -1,4 +1,5 @@
 using NumInt
+using Base.Test
 
 function test_precision(func,a,b,g,integral)
   exact=integral(b)-integral(a)

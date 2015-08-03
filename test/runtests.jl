@@ -1,4 +1,3 @@
-using Base.Test
 include ("test_closed_formulas.jl")
 include ("test_double_inf.jl")
 include ("test_sinh_tanh.jl")

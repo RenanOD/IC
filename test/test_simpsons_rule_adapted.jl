@@ -1,4 +1,5 @@
 using NumInt
+using Base.Test
 
 function test_precision(g,a,b,exact)
   approx=simpsons_rule_adapted(g,a,b,1e-6,25)

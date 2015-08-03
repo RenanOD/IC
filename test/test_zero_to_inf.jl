@@ -1,4 +1,5 @@
 using NumInt
+using Base.Test
 
 function test_precision(g,exact)
   approx=zero_to_inf(g,12)
