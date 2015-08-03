@@ -1,6 +1,7 @@
 export zero_to_inf
 export double_inf
 export simpsons_rule_inf
+export mid_point
 
 function zero_to_inf (f,n)
 approx=0
@@ -33,7 +34,16 @@ end
 function simpsons_rule_inf (f,a,b,n)
   x(t)=1/t
   g(t)=f(x(t))/t^2
-  approx=SR(g,1/b,1/a,n)
+  approx=simpsons_rule(g,1/b,1/a,n)
   return approx
 end
 
+function mid_point (f,a,b,n)
+h=(b-a)/n
+sum=f(a+h/2)
+for i=[1:n-1]
+  sum+=f(a+h/2+i*h)
+end
+approx=h*sum
+return approx
+end
