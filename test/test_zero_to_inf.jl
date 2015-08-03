@@ -1,28 +1,28 @@
 using NumInt
 
-   n=12
+function test_precision(g,exact)
+  approx=zero_to_inf(g,12)
+  @test_approx_eq_eps(exact,approx,1e-6)
+end
 
-f(t)=1/(1+t^2)
-integral=pi/2
-error=integral-zero_to_inf(f,n)
-println ("Error for eq.11 f(t)=1/(1+t^2): $error \n")
+function test_sinh_tanh()
 
-f(t)=e^(-t)/sqrt(t)
-integral=sqrt(pi)
-error=integral-zero_to_inf(f,n)
-println ("Error for eq.12 f(t)=e^(-t)/sqrt(t): $error \n")
+g(t)=1/(1+t^2)
+exact=pi/2
+test_precision(g,exact)
 
-f(t)=e^(-t^2/2)
-integral=sqrt(pi/2)
-error=integral-zero_to_inf(f,n)
-println ("Error for eq.13 f(t)=e^(-t^2/2): $error \n")
+g(t)=e^(-t)/sqrt(t)
+exact=sqrt(pi)
+test_precision(g,exact)
 
-f(t)=e^(-t)*cos(t)
-integral=1/2
-error=integral-zero_to_inf(f,n)
-println ("Error for eq.14 f(t)=e^(-t)*cos(t): $error \n")
+g(t)=e^(-t^2/2)
+exact=sqrt(pi/2)
+test_precision(g,exact)
 
-f(t)=sin(t)/t
-integral=pi/2
-error=integral-zero_to_inf(f,n)
-println ("Error for eq.15 f(t)=sin(t)/t: $error \n")
+g(t)=e^(-t)*cos(t)
+exact=1/2
+test_precision(g,exact)
+
+end
+
+test_sinh_tanh()

@@ -1,11 +1,11 @@
 using NumInt
 
 function test_precision(g,a,b,exact)
-  approx=sinh_tanh(g,a,b,12)
+  approx=simpsons_rule_adapted(g,a,b,1e-6,25)
   @test_approx_eq_eps(exact,approx,1e-6)
 end
 
-function test_sinh_tanh()
+function test_simpsons_rule_adapted()
 
 g(t)=t*log(1+t)
 (a,b)=(0,1)
@@ -17,16 +17,16 @@ g(t)=t^2*atan(t)
 exact=(pi-2+2log(2))/12
 test_precision(g,a,b,exact)
 
-g(t)=e^t*cos(t)
+g(t)=e^t
 (a,b)=(0,pi/2)
-exact=(e^(pi/2)-1)/2
+exact=e^(pi/2)-1
 test_precision(g,a,b,exact)
 
-g(t)=atan(sqrt(2+t^2))/((1+t^2)*sqrt(2+t^2))
-(a,b)=(0,1)
-exact=5*pi^2/96
+g(t)=1/(1+25t^2)
+(a,b)=(-1,1)
+exact=atan(5)/5-atan(-5)/5
 test_precision(g,a,b,exact)
 
 end
 
-test_sinh_tanh()
+test_simpsons_rule_adapted()

@@ -1,13 +1,20 @@
 using NumInt
 
-  n=12
+function test_precision(g,exact)
+  approx=double_inf(g,12)
+  @test_approx_eq_eps(exact,approx,1e-6)
+end
 
-f(t)=1/(1+t^2)
-integral=pi
-error=integral-double_inf(f,n)
-println ("Error for f(t)=1/(1+t^2): $error \n")
+function test_double_inf()
 
-f(t)=sin(t)/t
-integral=pi
-error=integral-double_inf(f,n)
-println ("Error for f(t)=sin(t)/t: $error \n")
+  g(t)=1/(1+t^2)
+  exact=pi*1.0
+  test_precision(g,exact)
+
+  g(t)=1/(25+4t^2)
+  exact=pi/10.0
+  test_precision(g,exact)
+
+end
+
+test_double_inf()
