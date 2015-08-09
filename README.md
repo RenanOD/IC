@@ -2,5 +2,7 @@
 
 [![Build Status](https://travis-ci.org/RenanOD/NumInt.jl.svg)](https://travis-ci.org/RenanOD/NumInt.jl)
 
-This repository contains codes that can be used for numerical integration.
-Each folder corresponds to a different method of quadrature.
+NumInt is a repository that contains functions which can be used for numerical integration.
+
+Each function uses a different method to approximate a specific type of integral. This includes improper integrals and intervals with singularities at the endpoints.
+
