@@ -1,6 +1,6 @@
 export simpsons_rule_adapted
 
-function simpsons_rule_adapted (f,a,b,tol,N)
+function simpsons_rule_adapted(f,a,b,tol,N)
 Va=fill(1.0,2N); Vb=fill(1.0,2N);
 i=1; approx=0; Va[i]=a; Vb[i]=b; m=0;
 
