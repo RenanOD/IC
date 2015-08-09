@@ -1,6 +1,3 @@
-using NumInt
-using Base.Test
-
 function test_precision(g,a,b,exact)
   approx=sinh_tanh(g,a,b,12)
   @test_approx_eq_eps(exact,approx,1e-6)

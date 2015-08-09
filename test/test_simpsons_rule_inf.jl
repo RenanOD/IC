@@ -1,6 +1,3 @@
-using NumInt
-using Base.Test
-
 function test_precision(g,a,b,exact)
   approx=simpsons_rule_inf(g,a,b,500)
   @test_approx_eq_eps(exact,approx,1e-6)
