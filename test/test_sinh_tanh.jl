@@ -25,6 +25,11 @@ g(t)=atan(sqrt(2+t^2))/((1+t^2)*sqrt(2+t^2))
 exact=5*pi^2/96
 test_precision(g,a,b,exact)
 
+g(t)=sqrt(t)/sqrt(1-t^2)
+(a,b)=(0,1)
+exact=2*sqrt(pi)*gamma(3/4)/gamma(1/4)
+test_precision(g,a,b,exact)
+
 end
 
 test_sinh_tanh()

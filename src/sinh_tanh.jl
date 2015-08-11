@@ -13,7 +13,11 @@ x_k(k)=tanh(sinh(k*h))
 approx=f((a+b)/2)*g(w_k(0))
 
 for k=1:s
-  approx+=f(a+subs(k))*g(w_k(k))+f(b-subs(k))*g(w_k(k))
+  j=subs(k)
+  if j<1e-16
+    j=1e-16
+  end
+  approx+=f(a+j)*g(w_k(k))+f(b-j)*g(w_k(k))
 end
 return approx
 end
