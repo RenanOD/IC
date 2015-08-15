@@ -2,7 +2,7 @@ export simpsons_rule_adapted
 
 function simpsons_rule_adapted(f, a, b, tol, N)
   Va = fill(1.0, 2N); Vb = fill(1.0, 2N);
-  i = 1; approx=0; Va[i] = a; Vb[i] = b; m = 0;
+  i = 1; approx = 0; Va[i] = a; Vb[i] = b; m = 0;
 
   while i > 0
     atemp = Va[i]; btemp = Vb[i]; htemp = (btemp - atemp)/2;
@@ -10,10 +10,10 @@ function simpsons_rule_adapted(f, a, b, tol, N)
     toltemp = 15tol/((b - a)/(btemp - atemp))
     i -= 1
 
-    if abs(S1-S2) < toltemp
+    if abs(S1 - S2) < toltemp
       approx += S2
     else
-      if ((b - a)/(btemp - atemp)>N)
+      if ((b - a)/(btemp - atemp) > N)
         approx += S2
         m = 1;
       else
