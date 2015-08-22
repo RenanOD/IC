@@ -1,6 +1,6 @@
 function test_precision(g, a, b, exact)
-  approx = simpsons_rule_inf(g, a, b, 500)
-  @test_approx_eq_eps(exact, approx, 1e-6)
+  approx = simpsons_rule_inf(g, a, b, 1000)
+  @test_approx_eq_eps(exact, approx, 1e-7)
 end
 
 function test_simpsons_rule_inf()

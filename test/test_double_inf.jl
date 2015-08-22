@@ -1,6 +1,6 @@
 function test_precision(g, exact)
-  approx=double_inf(g, 12)
-  @test_approx_eq_eps(exact, approx, 1e-6)
+  approx=double_inf(g, 10)
+  @test_approx_eq_eps(exact, approx, 1e-7)
 end
 
 function test_double_inf()

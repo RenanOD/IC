@@ -1,6 +1,6 @@
 function test_precision(g, exact)
-  approx = zero_to_inf(g, 12)
-  @test_approx_eq_eps(exact, approx, 1e-6)
+  approx = zero_to_inf(g, 9)
+  @test_approx_eq_eps(exact, approx, 1e-14)
 end
 
 function test_sinh_tanh()

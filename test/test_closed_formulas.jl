@@ -1,7 +1,7 @@
 function test_precision(func,a,b,g,integral)
   exact = integral(b) - integral(a)
   approx = func(g, a, b, 1e4)
-  @test_approx_eq_eps(exact, approx, 1e-6)
+  @test_approx_eq_eps(exact, approx, 1e-7)
 end
 
 function test_closed_formulas()
