@@ -4,5 +4,5 @@
 
 NumInt is a repository that contains functions which can be used for numerical integration.
 
-Each function uses a different method to approximate a specific type of integral. This includes improper integrals and integrals of functions with singularities at the endpoints of the interval.
+Each function uses a different method to approximate a specific type of integral, including improper integrals with singularities at the endpoints of the interval.
 
