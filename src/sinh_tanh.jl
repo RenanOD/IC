@@ -10,7 +10,7 @@ function sinh_tanh(f, a, b, n)
   for k = h:h:4.5
     j = subs(k)
     dxdt = g(k)
-    if j < eps(b)
+    if j < eps(Float64)
       break
     end
     f1 = f(a + j)
