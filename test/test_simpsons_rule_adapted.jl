@@ -1,6 +1,6 @@
 function test_precision(g, a, b, exact)
-  approx=simpsons_rule_adapted(g, a, b, 1e-10, 64)
-  @test_approx_eq_eps(exact, approx, 1e-10)
+  approx=simpsons_rule_adapted(g, a, b, 1e-14, 512)
+  @test_approx_eq_eps(exact, approx, 1e-14)
 end
 
 function test_simpsons_rule_adapted()
