@@ -1,5 +1,5 @@
 function test_precision(g, exact)
-  approx = zero_to_inf(g, 9)
+  approx = zero_to_inf(g, n = 9)
   @test_approx_eq_eps(exact, approx, 1e-14)
 end
 

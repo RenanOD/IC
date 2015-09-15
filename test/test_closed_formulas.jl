@@ -1,12 +1,12 @@
 function test_precision_trapezoidal_rule(a,b,g,integral)
   exact = integral(b) - integral(a)
-  approx = trapezoidal_rule(g, a, b, 1e6)
+  approx = trapezoidal_rule(g, a, b, n = 1e6)
   @test_approx_eq_eps(exact, approx, 1e-10)
 end
 
 function test_precision_simpsons_rule(a,b,g,integral)
   exact = integral(b) - integral(a)
-  approx = simpsons_rule(g, a, b, 1e6)
+  approx = simpsons_rule(g, a, b, n = 1e6)
   @test_approx_eq_eps(exact, approx, 1e-12)
 end
 

@@ -1,7 +1,7 @@
 export simpsons_rule
 export trapezoidal_rule
 
-function simpsons_rule(f, a, b, n)
+function simpsons_rule(f, a, b; n = 200)
   if n%2 != 0
     n += 1
   end
@@ -14,7 +14,7 @@ function simpsons_rule(f, a, b, n)
   return approx*(h/3)
 end
 
-function trapezoidal_rule(f, a, b, n)
+function trapezoidal_rule(f, a, b; n = 500)
   h = (b - a)/n
   approx = (f(a) + f(b))/2
   for i = 1:n-1

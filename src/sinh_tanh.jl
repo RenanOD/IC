@@ -1,6 +1,6 @@
 export sinh_tanh
 
-function sinh_tanh(f, a, b, n)
+function sinh_tanh(f, a, b; n = 10)
   h = 1.0/2^n
   q(k) = e^(-2*sinh(k))
   subs(k) = (b - a)*q(k)/(1 + q(k))
