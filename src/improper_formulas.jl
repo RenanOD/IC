@@ -33,7 +33,7 @@ end
 function simpsons_rule_inf(f, a, b; n = 200)
   x(t) = 1/t
   g(t) = f(x(t))/t^2
-  approx = simpsons_rule(g, 1/b, 1/a, n)
+  approx = simpsons_rule(g, 1/b, 1/a, n = n)
   return approx
 end
 
