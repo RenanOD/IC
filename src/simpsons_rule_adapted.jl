@@ -6,7 +6,7 @@ function simpsons_rule_adapted(f, a, b; tol = 1e-10, N = 128)
 
   while i > 0
     atemp = Va[i]; btemp = Vb[i]; htemp = (btemp - atemp)/2;
-    S1 = simpsons_rule(f, atemp, btemp, 2); S2 = simpsons_rule(f, atemp, btemp, 4);
+    S1 = simpsons_rule(f, atemp, btemp, n = 2); S2 = simpsons_rule(f, atemp, btemp, n = 4);
     toltemp = 15tol/((b - a)/(btemp - atemp))
     i -= 1
 
