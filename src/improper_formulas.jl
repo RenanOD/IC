@@ -23,7 +23,7 @@ function double_inf(f; n = 10)
   x(k) = sinh(pi*sinh(k)/2)
   w(k) = cosh(pi*sinh(k)/2)*pi*cosh(k)/2
 
-  for k = -4.8:h:4.8
+  for k = -4.5:h:4.5
     approx += (f(x(k))*w(k) + f(x(k + 1))*w(k + 1))*h/2
   end
   return approx
