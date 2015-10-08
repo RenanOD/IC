@@ -1,12 +1,3 @@
-export sinh_tanh
-export zero_to_inf
-export simpsons_rule_inf
-export mid_point
-export double_inf
-export simpsons_rule
-export trapezoidal_rule
-export open
-
 function sinh_tanh(f, a, b; Nf = 2^5)
 
   h = 9.0/(Nf - 1)
