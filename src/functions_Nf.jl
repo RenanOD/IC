@@ -1,3 +1,12 @@
+export sinh_tanh
+export zero_to_inf
+export simpsons_rule_inf
+export mid_point
+export double_inf
+export simpsons_rule
+export trapezoidal_rule
+export open
+
 function sinh_tanh(f, a, b; Nf = 2^5)
 
   h = 9.0/(Nf - 1)
@@ -25,7 +34,6 @@ function sinh_tanh(f, a, b; Nf = 2^5)
 
   approx += (f1 + f2)*dxdt*h
   end
-println ("$nt")
 return approx
 end
 
@@ -49,7 +57,6 @@ function zero_to_inf(f; Nf = 2^5)
     approx += f1 + f2
   end
   approx = approx*h/2
-  println ("$nt")
   return approx
 end
 
@@ -73,6 +80,7 @@ function mid_point(f, a, b; Nf = 2^5)
 end
 
 function double_inf(f; Nf = 2^5)
+
   approx = 0
   h = 18/(Nf-1)
   nt = 0
@@ -88,7 +96,6 @@ function double_inf(f; Nf = 2^5)
     end
 
   end
-  println ("$nt")
   return approx
 end
 
@@ -113,7 +120,6 @@ function simpsons_rule(f, a, b; Nf = 2^5)
     end 
 
   end
-  println ("$nt")
   return approx*(h/3)
 end
 
@@ -134,6 +140,16 @@ function trapezoidal_rule(f, a, b; Nf = 2^5)
       break
     end
   end
-  println ("$nt")
   return approx*h
 end
+
+function open(f, a, b; Nf = 200)
+  n = Nf + 2
+  h = (b - a)/n
+  approx = 3/2(f(a + h) + f(b - h))
+
+  for i = 2:n - 2
+    approx += f(a + i*h)
+  end
+  return h*approx
+ end
