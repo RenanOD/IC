@@ -134,7 +134,7 @@ function trapezoidal_rule(f, a, b; Nf = 2^5)
   return approx*h
 end
 
-function open(f, a, b; Nf = 200)
+function open_formula(f, a, b; Nf = 200)
   n = Nf + 2
   h = (b - a)/n
   approx = 3/2(f(a + h) + f(b - h))

@@ -6,7 +6,7 @@ end
 
 function test_precision_open(a,b,g,integral)
   exact = integral(b) - integral(a)
-  approx = open(g, a, b, n = 1e6)
+  approx = open_formula(g, a, b, n = 1e6)
   @test_approx_eq_eps(exact, approx, 1e-7)
 end
 

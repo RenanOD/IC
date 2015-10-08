@@ -1,5 +1,5 @@
 export mid_point
-export open
+export open_formula
 
 function mid_point(f, a, b; n = 500)
   h = (b - a)/n
@@ -11,7 +11,7 @@ function mid_point(f, a, b; n = 500)
   return approx
 end
 
-function open(f, a, b; n = 500)
+function open_formula(f, a, b; n = 500)
   h = (b - a)/n
   approx = 3/2(f(a + h) + f(b - h))
 
