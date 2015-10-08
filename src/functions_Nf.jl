@@ -12,11 +12,14 @@ function sinh_tanh(f, a, b; Nf = 2^5)
   for k = h:h:4.5
     j = subs(k)
     dxdt = g(k)
-    if j < eps(Float64)
-      break
-    end
+    #if j < eps(a)
+      #break
+    #end
     f1 = f(a + j)
     f2 = f(b - j)
+    if abs(f1) == Inf || abs(f2) == Inf
+      break
+    end
     nt += 2
 
     if nt > Nf
