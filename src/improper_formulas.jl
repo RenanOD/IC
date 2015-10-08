@@ -1,8 +1,6 @@
 export zero_to_inf
 export double_inf
 export simpsons_rule_inf
-export mid_point
-export open
 
 function zero_to_inf(f; n = 10)
   h = 1/2.0^n
@@ -36,24 +34,3 @@ function simpsons_rule_inf(f, a, b; n = 200)
   approx = simpsons_rule(g, 1/b, 1/a, n = n)
   return approx
 end
-
-function mid_point(f, a, b; n = 500)
-  h = (b - a)/n
-  sum = f(a + h/2)
-  for i = 1:n-1
-    sum += f(a + h/2 + i*h)
-  end
-  approx = h*sum
-  return approx
-end
-
-function open(f, a, b; Nf = 500)
-  n = Nf + 2
-  h = (b - a)/n
-  approx = 3/2(f(a + h) + f(b - h))
-
-  for i = 2:n - 2
-    approx += f(a + i*h)
-  end
-  return h*approx
- end
