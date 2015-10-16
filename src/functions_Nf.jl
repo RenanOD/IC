@@ -12,11 +12,13 @@ function sinh_tanh(f, a, b; Nf = 2^5)
   for k = h:h:4.5
     j = subs(k)
     dxdt = g(k)
-    if j < eps(Float64)
-      break
-    end
     f1 = f(a + j)
     f2 = f(b - j)
+
+    if abs(f1) == Inf || abs(f2) == Inf
+      break
+    end
+    
     nt += 2
 
     if nt > Nf
@@ -30,13 +32,13 @@ end
 
 function zero_to_inf(f; Nf = 2^5)
 
-  h = 19.2/(Nf - 2)
+  h = 18.0/(Nf - 2)
   nt = 0
 
   x(k) = e^(pi*sinh(k))
   w(k) = x(k)*pi*cosh(k)
   approx = 0
-  for k = -4.8:h:4.8
+  for k = -4.5:h:4.5
     f1 = f(x(k))*w(k)
     f2 = f(x(k + 1))*w(k + 1)
     nt += 2
@@ -144,3 +146,19 @@ function open_formula(f, a, b; Nf = 200)
   end
   return h*approx
  end
+ 
+function gaussian_quadrature(f, a, b; Nf = 16.0)
+  h = (b - a)/(Nf - 1)
+  atemp = a
+  btemp = a + h
+  approx = 0
+
+  for k = h:h:(b-h)
+    x1 = (atemp + btemp + sqrt(3)/3*(btemp - atemp))/2
+    x2 = (atemp + btemp - sqrt(3)/3*(btemp - atemp))/2
+    approx += (f(x1) + f(x2))(btemp - atemp)/2
+    atemp += h; btemp += h;
+  end
+
+  return approx
+end
