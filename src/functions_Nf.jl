@@ -148,17 +148,17 @@ function open_formula(f, a, b; Nf = 200)
  end
  
 function gaussian_quadrature(f, a, b; Nf = 16.0)
-  h = (b - a)/(Nf - 1)
-  atemp = a
-  btemp = a + h
-  approx = 0
+  h = 2(b-a)/Nf
+  atemp = 0.0
+  btemp = h
+  approx = 0.0
+  x1(atemp, btemp) = (atemp + btemp + sqrt(3)/3*h)/2
+  x2(atemp, btemp) = (atemp + btemp - sqrt(3)/3*h)/2
 
-  for k = h:h:(b-h)
-    x1 = (atemp + btemp + sqrt(3)/3*(btemp - atemp))/2
-    x2 = (atemp + btemp - sqrt(3)/3*(btemp - atemp))/2
-    approx += (f(x1) + f(x2))(btemp - atemp)/2
-    atemp += h; btemp += h;
+  for k = 1:1:Nf/2
+    approx += (f(x1(atemp, btemp)) + f(x2(atemp, btemp)))
+    atemp+=h; btemp+=h;
   end
 
-  return approx
+  return approx*h/2
 end
