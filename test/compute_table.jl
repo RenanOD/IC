@@ -6,7 +6,7 @@ function compute_table(f, a, b, exact)
   t = size(functions, 1);
   
   table = cell(u + 1, t + 1)
-  table[1,:] = ["Nf"; "TR"; "SR"; "MP"; "ST"; "QG"]
+  table[1,:] = ["Nf"; "TR"; "SR"; "PM"; "QG"; "ST"]
 
   for i = 1:u 
     table[i + 1,1] = Nf[i];
@@ -54,8 +54,9 @@ function plot_table2(table)
   (m,n) = size(table)
   x = Int[int(x) for x in table[2:end,1]]
 
-  colors = ["red", "blue", "black", "green", "magenta"]
+  colors = ["red", "green", "black", "magenta", "blue"]
 
+  legs = Array(Curve, 5)
   plt = FramedPlot()
 
   for i = 1:5
@@ -65,10 +66,16 @@ function plot_table2(table)
     add(plt, c)
     p = Points(x, y, "color", colors[i], "symbolkind", "circle")
     add(plt, p)
+    legs[i] = c
   end
 
   setattr(plt, "xlog", true)
   setattr(plt, "ylog", true)
+  add(plt, Legend(0.8, 0.95, legs))
+  setattr(plt, "xrange", (2^4, 1050))
+  setattr(plt, "yrange", (1e-14, 1e-1))
+  setattr(plt.x1, "label", "N")
+  setattr(plt.y1, "label", "Erro")
 
   savefig(plt, "teste_plot.png", "width", 600, "height", 800)
 end

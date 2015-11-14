@@ -4,7 +4,7 @@ function plot_table2(table)
 
   colors = ["red", "blue", "black", "green", "magenta"]
 
-  legs = []
+  legs = Array(Curve, 5)
   plt = FramedPlot()
 
   for i = 1:5
@@ -14,7 +14,7 @@ function plot_table2(table)
     add(plt, c)
     p = Points(x, y, "color", colors[i], "symbolkind", "circle")
     add(plt, p)
-    push!(legs, c)
+    legs[i] = c
   end
 
   setattr(plt, "xlog", true)
