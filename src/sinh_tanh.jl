@@ -1,21 +1,20 @@
 export sinh_tanh
 
-function sinh_tanh(f, a, b; n = 10)
-  h = 1.0/2^n
-  q(k) = e^(-2*sinh(k))
-  subs(k) = (b - a)*q(k)/(1 + q(k))
-  g(k) = 2*(b - a)*q(k)*cosh(k)/(1 + q(k))^2
-  approx = f((a + b)/2)*g(0)*h
+function sinh_tanh(f, a, b; n = 6)
+  h = 0.5^n
+  approx = f((a + b)/2)*0.25
+  l = eps(Float64)
 
-  for k = h:h:4.5
-    j = subs(k)
-    dxdt = g(k)
-    if j < eps(Float64)
-      break
+  for k = h:h:3.7
+    qk = exp(-2sinh(k))
+    d = (1 + qk)
+    j = (b - a)*qk/d
+    w = qk*cosh(k)/d^2
+    if j > l
+      approx += (f(a + j) + f(b - j))*w
+    else
+      approx += (f(a + 2.3e-16) + f(b - 2.3e-16))*w
     end
-    f1 = f(a + j)
-    f2 = f(b - j)
-  approx += (f1 + f2)*dxdt*h
   end
-return approx
+  return approx*2*h*(b - a)
 end
