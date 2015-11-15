@@ -38,21 +38,6 @@ using Winston
 function plot_table(table)
   (m,n) = size(table)
   x = Int[int(x) for x in table[2:end,1]]
-  y1 = Float64[float64(x) for x in table[2:end,2]]
-  y2 = Float64[float64(x) for x in table[2:end,3]]
-  y3 = Float64[float64(x) for x in table[2:end,4]]
-  y4 = Float64[float64(x) for x in table[2:end,5]]
-  y5 = Float64[float64(x) for x in table[2:end,6]]
-
-  loglog(x, y1, "ro-", x, y2, "go-", x, y3, "ko-", x, y4, "bo-", x, y5, "mo-", xlabel = "N", ylabel = "Erro", title = "Comparação dos Métodos")
-  ylim(1e-14,1e-1)
-  xlim(2^4, 1050)
-  legend(["Trapézio", "", "Simpsons", "", "Ponto Médio", "", "senh-tgh"], [0.85,0.95])
-end
-
-function plot_table2(table)
-  (m,n) = size(table)
-  x = Int[int(x) for x in table[2:end,1]]
 
   colors = ["red", "green", "black", "magenta", "blue"]
 
