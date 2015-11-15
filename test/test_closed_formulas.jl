@@ -10,6 +10,12 @@ function test_precision_simpsons_rule(a,b,g,integral)
   @test_approx_eq_eps(exact, approx, 1e-12)
 end
 
+function test_precision_simpsons_rule_2(a,b,g,integral)
+  exact = integral(b) - integral(a)
+  approx = simpsons_rule(g, a, b, n = 1e6-1)
+  @test_approx_eq_eps(exact, approx, 1e-12)
+end
+
 function test_closed_formulas()
   b = 1
   for a = -1:0
@@ -18,6 +24,7 @@ function test_closed_formulas()
     integral(x) = x^2/2
     test_precision_trapezoidal_rule(a, b, g, integral)
     test_precision_simpsons_rule(a,b,g,integral)
+    test_precision_simpsons_rule_2(a,b,g,integral)
 
     g(x) = x^2
     integral(x) = x^3/3
