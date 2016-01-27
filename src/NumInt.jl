@@ -1,10 +1,8 @@
 module NumInt
 
 include("closed_formulas.jl")
-include("simpsons_rule_adapted.jl")
+include("adapted_formulas.jl")
 include("improper_formulas.jl")
 include("sinh_tanh.jl")
-include("mid_point.jl")
-include("gaussian_quadrature.jl")
 
 end

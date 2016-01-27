@@ -19,33 +19,35 @@ function sinh_tanh(f, a, b; n = 6)
   return approx*2*h*(b - a)
 end
 
-function sinh_tanh(f, a::BigFloat, b::BigFloat; n = 6)
-  h = BigFloat(1//2)^n
-  approx = f((a + b)*BigFloat(1//2))*BigFloat(1//4)
+function sinh_tanh(f, a::BigFloat, b::BigFloat; n = 12)
+  big_one = one(BigFloat)
+  h = (big_one/2)^n
+  approx = f((a + b)*(big_one/2))*big_one/4
   l = eps(BigFloat)
 
-  for k = h:h:BigFloat(52//10)
-    qk = exp(-BigFloat(2)*sinh(k))
-    d = (BigFloat(1) + qk)
+  for k = h:h:BigFloat(52)/10
+    qk = exp(-big_one*2*sinh(k))
+    d = (big_one + qk)
     j = (b - a)*qk/d
-    w = qk*cosh(k)/d^BigFloat(2)
+    w = qk*cosh(k)/d^(2*big_one)
     approx += (f(a + j) + f(b - j))*w
   end
-  return approx*BigFloat(2)*h*(b - a)
+  return approx*big_one*2*h*(b - a)
 end
 
-function sinh_tanh(f, a::BigFloat, b::BigFloat, lim::BigFloat ; n = 6)
-  h = BigFloat(1//2)^n
-  approx = f((a + b)*BigFloat(1//2))*BigFloat(1//4)
+function sinh_tanh(f, a::BigFloat, b::BigFloat, lim::BigFloat; n = 12)
+  big_one = one(BigFloat)
+  h = (big_one/2)^n
+  approx = f((a + b)*big_one/2)*big_one/4
   l = eps(BigFloat)
   sup = asinh(-log(lim)/2)
 
   for k = h:h:sup
-    qk = exp(-BigFloat(2)*sinh(k))
-    d = (BigFloat(1) + qk)
+    qk = exp(-big_one*2*sinh(k))
+    d = (big_one + qk)
     j = (b - a)*qk/d
-    w = qk*cosh(k)/d^BigFloat(2)
+    w = qk*cosh(k)/d^(big_one*2)
     approx += (f(a + j) + f(b - j))*w
   end
-  return approx*BigFloat(2)*h*(b - a)
+  return approx*big_one*2*h*(b - a)
 end
