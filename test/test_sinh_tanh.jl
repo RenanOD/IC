@@ -66,7 +66,7 @@ end
 
 function test_sinh_tanh_lim()
 
-  lim = BigFloat(1)^(-21)
+  lim = parse(BigFloat, "1e-45")
 
   g(t) = t*log(one(BigFloat) + t)
   (a, b) = (zero(BigFloat), one(BigFloat))
