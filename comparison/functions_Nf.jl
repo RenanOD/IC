@@ -30,6 +30,39 @@ function sinh_tanh(f, a, b; Nf = 2^5)
 return approx
 end
 
+function sinh_tanh(f, a::BigFloat, b::BigFloat; Nf = 2^5)
+ 
+  big_one = one(BigFloat)
+  h = parse(BigFloat, "10.4")/(Nf - 1)
+  nt = 0
+
+  q(k) = e^(-big_one*2*sinh(k))
+  subs(k) = (b - a)*q(k)/(big_one + q(k))
+  g(k) = 2(b - a)*q(k)*cosh(k)/(big_one + q(k))^2
+  approx = f((a + b)/2)*g(zero(BigFloat))*h
+  nt+=1
+
+  for k = h:h:big_one*parse(BigFloat, "5.2")
+    j = subs(k)
+    dxdt = g(k)
+    f1 = f(a + j)
+    f2 = f(b - j)
+
+    if abs(f1) == Inf || abs(f2) == Inf
+      break
+    end
+    
+    nt += 2
+
+    if nt > Nf
+      break
+    end
+
+  approx += (f1 + f2)*dxdt*h
+  end
+return approx
+end
+
 function zero_to_inf(f; Nf = 2^5)
 
   h = 18.0/(Nf - 2)

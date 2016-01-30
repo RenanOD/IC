@@ -19,6 +19,21 @@ function sinh_tanh(f, a, b; n = 6)
   return approx*2*h*(b - a)
 end
 
+function sinh_tanh(f, a, b, lim; n = 6)
+  h = 0.5^n
+  approx = f((a + b)/2)*0.25
+  sup = asinh(-log(lim)/2)
+
+  for k = h:h:sup
+    qk = exp(-2sinh(k))
+    d = (1 + qk)
+    j = (b - a)*qk/d
+    w = qk*cosh(k)/d^2
+    approx += (f(a + j) + f(b - j))*w
+  end
+  return approx*2*h*(b - a)
+end
+
 function sinh_tanh(f, a::BigFloat, b::BigFloat; n = 12)
   big_one = one(BigFloat)
   h = (big_one/2)^n
@@ -39,7 +54,6 @@ function sinh_tanh(f, a::BigFloat, b::BigFloat, lim::BigFloat; n = 12)
   big_one = one(BigFloat)
   h = (big_one/2)^n
   approx = f((a + b)*big_one/2)*big_one/4
-  l = eps(BigFloat)
   sup = asinh(-log(lim)/2)
 
   for k = h:h:sup

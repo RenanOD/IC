@@ -56,9 +56,9 @@ function plot_table(table)
 
   setattr(plt, "xlog", true)
   setattr(plt, "ylog", true)
-  add(plt, Legend(0.8, 0.95, legs))
+  add(plt, Legend(0.8, 0.65, legs))
   setattr(plt, "xrange", (2^4, 1050))
-  setattr(plt, "yrange", (1e-14, 1e-1))
+  setattr(plt, "yrange", (1e-50, 1e-1))
   setattr(plt.x1, "label", "N")
   setattr(plt.y1, "label", "Erro")
 
