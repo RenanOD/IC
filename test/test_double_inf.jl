@@ -9,9 +9,9 @@ function test_double_inf()
   exact = pi*1.0
   test_precision(g, exact)
 
-  g(t) = 1/(25 + 4t^2)
+  h(t) = 1/(25 + 4t^2)
   exact = pi/10.0
-  test_precision(g, exact)
+  test_precision(h, exact)
 
 end
 
