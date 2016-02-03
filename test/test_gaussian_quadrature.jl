@@ -5,13 +5,13 @@ end
 
 function test_gaussian_quadrature()
 
-  g(t) = t^2
+  g1(t) = t^2
   exact = 1/3
-  test_precision(g, 0, 1, exact)
+  test_precision(g1, 0, 1, exact)
 
-  g(t) = 7t^3
+  g2(t) = 7t^3
   exact = 0.0
-  test_precision(g, -1, 1, exact)
+  test_precision(g2, -1, 1, exact)
 
 end
 

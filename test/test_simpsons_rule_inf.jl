@@ -5,15 +5,15 @@ end
 
 function test_simpsons_rule_inf()
 
-  g(x) = x/e^(x/2)
+  g1(x) = x/e^(x/2)
   exact = 6/e^(1/2)
   (a, b) = (1, 1e60)
-  test_precision(g, a, b, exact)
+  test_precision(g1, a, b, exact)
 
-  g(x) = 3x^2*e^(-x^3)
+  g2(x) = 3x^2*e^(-x^3)
   exact = 1/e
   (a, b) = (1,1e60)
-  test_precision(g, a, b, exact)
+  test_precision(g2, a, b, exact)
 
 end
 

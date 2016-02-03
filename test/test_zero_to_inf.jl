@@ -5,21 +5,21 @@ end
 
 function test_sinh_tanh()
 
-  g(t) = 1/(1+t^2)
+  g1(t) = 1/(1+t^2)
   exact = pi/2
-  test_precision(g, exact)
+  test_precision(g1, exact)
 
-  g(t) = e^(-t)/sqrt(t)
+  g2(t) = e^(-t)/sqrt(t)
   exact = sqrt(pi)
-  test_precision(g, exact)
+  test_precision(g2, exact)
 
-  g(t) = e^(-t^2/2)
+  g3(t) = e^(-t^2/2)
   exact = sqrt(pi/2)
-  test_precision(g, exact)
+  test_precision(g3, exact)
 
-  g(t) = e^(-t)*cos(t)
+  g4(t) = e^(-t)*cos(t)
   exact = 1/2
-  test_precision(g, exact)
+  test_precision(g4, exact)
 
 end
 

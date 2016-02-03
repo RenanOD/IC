@@ -8,29 +8,29 @@ function test_mid_point()
   b = 1
   for a = -1:0
 
-    g(x) = x
-    integral(x) = x^2/2
-    test_precision_mid_point(a,b,g,integral)
+    g1(x) = x
+    integral1(x) = x^2/2
+    test_precision_mid_point(a, b, g1, integral1)
 
-    g(x) = x^2
-    integral(x) = x^3/3
-    test_precision_mid_point(a,b,g,integral)
+    g2(x) = x^2
+    integral2(x) = x^3/3
+    test_precision_mid_point(a, b, g2, integral2)
 
-    g(x) = 5x+1
-    integral(x) = x^2*5/2+x
-    test_precision_mid_point(a,b,g,integral)
+    g3(x) = 5x+1
+    integral3(x) = x^2*5/2+x
+    test_precision_mid_point(a, b, g3, integral3)
 
-    g(x) = sin(x)
-    integral(x) = -cos(x)
-    test_precision_mid_point(a,b,g,integral)
+    g4(x) = sin(x)
+    integral4(x) = -cos(x)
+    test_precision_mid_point(a, b, g4, integral4)
 
-    g(x) = 1/(1+x^2)
-    integral(x) = atan(x)
-    test_precision_mid_point(a,b,g,integral)
+    g5(x) = 1/(1+x^2)
+    integral5(x) = atan(x)
+    test_precision_mid_point(a, b, g5, integral5)
 
-    g(x) = e^x
-    integral(x) = e^x
-    test_precision_mid_point(a,b,g,integral)
+    g6(x) = e^x
+    integral6(x) = e^x
+    test_precision_mid_point(a, b, g6, integral6)
   end
 end
 

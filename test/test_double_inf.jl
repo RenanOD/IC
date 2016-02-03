@@ -5,13 +5,13 @@ end
 
 function test_double_inf()
 
-  g(t) = 1/(1 + t^2)
+  g1(t) = 1/(1 + t^2)
   exact = pi*1.0
-  test_precision(g, exact)
+  test_precision(g1, exact)
 
-  h(t) = 1/(25 + 4t^2)
+  g2(t) = 1/(25 + 4t^2)
   exact = pi/10.0
-  test_precision(h, exact)
+  test_precision(g2, exact)
 
 end
 

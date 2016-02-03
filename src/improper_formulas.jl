@@ -31,10 +31,13 @@ function double_inf(f; n = 10)
 end
 
 function simpsons_rule_inf(f, a, b; n = 200)
-  x(t) = 1/t
-  g(t) = f(x(t))/t^2
-  approx = simpsons_rule(g, 1/b, 1/a, n = n)
-  return approx
+  if a != 0
+    approx = simpsons_rule(t->f(1/t)/t^2, 1/b, 1/a, n = n)
+    return approx
+  else
+    approx = simpsons_rule(f, 0, 1, n = n)
+    approx += simpsons_rule(t->f(1/t)/t^2, 1/b, 1, n = n)
+  end
 end
 
 function gaussian_quadrature(f, a, b; n = 10)
