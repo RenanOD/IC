@@ -1,9 +1,9 @@
 function test_precision(g, a, b, exact)
-  approx=simpsons_rule_adapted(g, a, b, tol = 1e-14, N = 512)
+  approx=adaptive_simpson(g, a, b, tol = 1e-14, N = 512)
   @test_approx_eq_eps(exact, approx, 1e-14)
 end
 
-function test_simpsons_rule_adapted()
+function test_adaptive_simpson()
 
   g1(t) = t*log(1 + t)
   (a, b) = (0, 1)
@@ -27,4 +27,4 @@ function test_simpsons_rule_adapted()
 
 end
 
-test_simpsons_rule_adapted()
+test_adaptive_simpson()
