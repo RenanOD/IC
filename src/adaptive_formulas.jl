@@ -36,22 +36,22 @@ end
 
 function adaptive_simpson2(f, a, b; tol = 1e-6, hlim = 1/512)
   h = b - a; fa = f(a); fm1 = f(a + h/4); fm = f(a + h/2); fm2 = f(a + 3h/4); fb = f(b)
-  S2 = h*(fa + 4fm + fb)/6; S4 = h*(fa + 4(fm1 + fm2) + 2fm + fb)/12
+  S2 = h*(f(a) + 4fm + f(b))/6; S4 = h*(f(a) + 4(fm1 + fm2) + 2fm + f(b))/12
   if abs(S4 - S2) < 15tol || h/4 < hlim
     return S4
   else
     m = a + h/2
-    return adapted_simpson2(f, a, m, tol/2, hlim, fa, fm1, fm) + adapted_simpson2(f, m, b, tol/2, hlim, fm, fm2, fb)
+    return adaptive_simpson2(f, a, m, tol/2, hlim, fa, fm1, fm) + adaptive_simpson2(f, m, b, tol/2, hlim, fm, fm2, fb)
   end
 end
 
-function adapted_simpson2(f, a, b, tol, hlim, fa, fm, fb)
-  h = b - a; fm1 = f(a + h/4); fm2 = f(a + 3h/4)
+function adaptive_simpson2(f, a, b, tol, hlim, fa, fm, fb)
+  h = b - a; fa = f(a); fm1 = f(a + h/4); fm2 = f(a + 3h/4); fb = f(b)
   S2 = h*(fa + 4fm + fb)/6; S4 = h*(fa + 4(fm1 + fm2) + 2fm + fb)/12
   if abs(S4 - S2) < 15tol || h/4 < hlim
     return S4
   else
     m = a + h/2
-    return adapted_simpson2(f, a, m, tol/2, hlim, fa, fm1, fm) + adapted_simpson2(f, m, b, tol/2, hlim, fm, fm2, fb)
+    return adaptive_simpson2(f, a, m, tol/2, hlim, fa, fm1, fm) + adaptive_simpson2(f, m, b, tol/2, hlim, fm, fm2, fb)
   end
 end

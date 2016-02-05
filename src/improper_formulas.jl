@@ -32,11 +32,9 @@ end
 
 function simpsons_rule_inf(f, a, b; n = 200)
   if a != 0
-    approx = simpsons_rule(t->f(1/t)/t^2, 1/b, 1/a, n = n)
-    return approx
+    return simpsons_rule(t->f(1/t)/t^2, 1/b, 1/a, n = n)
   else
-    approx = simpsons_rule(f, 0, 1, n = n)
-    approx += simpsons_rule(t->f(1/t)/t^2, 1/b, 1, n = n)
+    approx = simpsons_rule(f, 0, 1, n = n) + simpsons_rule(t->f(1/t)/t^2, 1/b, 1, n = n)
   end
 end
 
