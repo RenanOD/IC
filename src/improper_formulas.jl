@@ -6,7 +6,7 @@ export mid_point
 export clenshaw_rule
 
 function zero_to_inf(f; n = 10)
-  h = 1/2.0^n
+  h = 1/2^n
   x(k) = e^(pi*sinh(k))
   w(k) = x(k)*pi*cosh(k)
   approx = 0
@@ -47,9 +47,9 @@ function gaussian_quadrature(f, a, b; n = 10)
   x1(atemp, btemp) = (atemp + btemp + sqrt(3)*h/3)/2
   x2(atemp, btemp) = (atemp + btemp - sqrt(3)*h/3)/2
 
-  for k = 1:1:n
+  for k = 1 : n
     approx += (f(x1(atemp, btemp)) + f(x2(atemp, btemp)))
-    atemp+=h; btemp+=h;
+    atemp += h; btemp += h;
   end
 
   return approx*h/2
@@ -58,7 +58,7 @@ end
 function mid_point(f, a, b; n = 500)
   h = (b - a)/n
   sum = f(a + h/2)
-  for i = 1:n-1
+  for i = 1 : n - 1
     sum += f(a + h/2 + i*h)
   end
   approx = h*sum
@@ -66,28 +66,21 @@ function mid_point(f, a, b; n = 500)
 end
 
 
-function clenshaw_rule(f, a, b; N = 12)
-  V = fill(1.0, N, N)
-  F = fill(0.0, N); A = copy(F); W = copy(F)
-  M = N - 1
+function clenshaw_rule(f, a, b, n)
+  V = fill(1.0, n, n)
+  F = fill(0.0, n); W = fill(1.0, n)
+  h = b - a; N = n - 1
 
-  for i = 1 : N
-    if i > 1
-      for j = 2 : N
-        V[i, j] = cos((j - 1)*(i - 1)*pi/M)
+  for i = 1 : n
+    if i != 1
+      i % 2 != 0 ? W[i] = 2/(1 - (i - 1)^2) : W[i] = 0
+      for j = 2 : n
+        V[i, j] = cos((j - 1)*(i - 1)/N*pi)
       end
     end
-    V[i, N] *= 0.5
+    V[i, n] *= 0.5
     V[i, 1] = 0.5
-    F[i] = f((a + b + cos(pi*(i - 1)/M)*(b - a))/2)*(b - a)/M
+    F[i] = f((a + b + cos((i - 1)/N*pi)*h)/2)
   end
-
-  A = V*F
-
-  for i = 2 : 2 : M
-      W[i + 1] = 2/(1 - i^2)
-  end
-  W[1] = 1.0
-
-  return W'*A
+  return (W'*(V*F))*h/N
 end
