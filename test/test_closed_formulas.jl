@@ -46,8 +46,8 @@ function test_closed_formulas()
     test_precision_trapezoidal_rule(a, b, g5, integral5)
     test_precision_simpsons_rule(a, b, g5, integral5)
 
-    g6(x) = e^x
-    integral6(x) = e^x
+    g6(x) = exp(x)
+    integral6(x) = exp(x)
     test_precision_trapezoidal_rule(a, b, g6, integral6)
     test_precision_simpsons_rule(a, b, g6, integral6)
   end

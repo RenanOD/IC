@@ -3,6 +3,7 @@ export double_inf
 export simpsons_rule_inf
 export gaussian_quadrature
 export mid_point
+export clenshaw_rule
 
 function zero_to_inf(f; n = 10)
   h = 1/2.0^n
@@ -62,4 +63,31 @@ function mid_point(f, a, b; n = 500)
   end
   approx = h*sum
   return approx
+end
+
+
+function clenshaw_rule(f, a, b; N = 12)
+  V = fill(1.0, N, N)
+  F = fill(0.0, N); A = copy(F); W = copy(F)
+  M = N - 1
+
+  for i = 1 : N
+    if i > 1
+      for j = 2 : N
+        V[i, j] = cos((j - 1)*(i - 1)*pi/M)
+      end
+    end
+    V[i, N] *= 0.5
+    V[i, 1] = 0.5
+    F[i] = f((a + b + cos(pi*(i - 1)/M)*(b - a))/2)*(b - a)/M
+  end
+
+  A = V*F
+
+  for i = 2 : 2 : M
+      W[i + 1] = 2/(1 - i^2)
+  end
+  W[1] = 1.0
+
+  return W'*A
 end
