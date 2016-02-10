@@ -2,11 +2,11 @@ function compute_table(f, a, b, exact)
 
   Nf = [2^4, 2^5, 2^6, 2^7, 2^8, 2^9, 2^10];
   u = size(Nf, 1); k = 1;
-  functions = [trapezoidal_rule, simpsons_rule, mid_point, gaussian_quadrature, sinh_tanh];
+  functions = [trapezoidal_rule, simpsons_rule, mid_point, clenshaw_rule, sinh_tanh];
   t = size(functions, 1);
   
   table = cell(u + 1, t + 1)
-  table[1,:] = ["Nf"; "TR"; "SR"; "PM"; "QG"; "ST"]
+  table[1,:] = ["Nf"; "TR"; "SR"; "PM"; "CR"; "ST"]
 
   for i = 1:u 
     table[i + 1,1] = Nf[i];

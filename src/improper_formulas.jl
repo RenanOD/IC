@@ -7,7 +7,7 @@ export clenshaw_rule
 
 function zero_to_inf(f; n = 10)
   h = 1/2^n
-  x(k) = e^(pi*sinh(k))
+  x(k) = exp(pi*sinh(k))
   w(k) = x(k)*pi*cosh(k)
   approx = 0
   for k = -4.8:h:4.8
@@ -15,13 +15,11 @@ function zero_to_inf(f; n = 10)
     f2 = f(x(k + 1))*w(k + 1)
     approx += f1 + f2
   end
-  approx = approx*h/2
-  return approx
+  return approx*h/2
 end
 
 function double_inf(f; n = 10)
-  approx = 0
-  h = 1.0/2.0^n
+  approx = 0; h = 1/2^n
   x(k) = sinh(pi*sinh(k)/2)
   w(k) = cosh(pi*sinh(k)/2)*pi*cosh(k)/2
 
@@ -40,12 +38,12 @@ function simpsons_rule_inf(f, a, b; n = 200)
 end
 
 function gaussian_quadrature(f, a, b; n = 10)
-  h = (b-a)/n
-  atemp = a
-  btemp = a + h
+  h = (b - a)/n
+  atemp = a; btemp = a + h
   approx = 0
-  x1(atemp, btemp) = (atemp + btemp + sqrt(3)*h/3)/2
-  x2(atemp, btemp) = (atemp + btemp - sqrt(3)*h/3)/2
+  s = sqrt(3)*h/3
+  x1(atemp, btemp) = (atemp + btemp + s)/2
+  x2(atemp, btemp) = (atemp + btemp - s)/2
 
   for k = 1 : n
     approx += (f(x1(atemp, btemp)) + f(x2(atemp, btemp)))
@@ -57,30 +55,28 @@ end
 
 function mid_point(f, a, b; n = 500)
   h = (b - a)/n
-  sum = f(a + h/2)
+  approx = f(a + h/2)
   for i = 1 : n - 1
-    sum += f(a + h/2 + i*h)
+    approx += f(a + h/2 + i*h)
   end
-  approx = h*sum
-  return approx
+  return h*approx
 end
-
 
 function clenshaw_rule(f, a, b, n)
   V = fill(1.0, n, n)
   F = fill(0.0, n); W = fill(1.0, n)
-  h = b - a; N = n - 1
+  h = b - a; M = pi/(n - 1)
 
   for i = 1 : n
     if i != 1
       i % 2 != 0 ? W[i] = 2/(1 - (i - 1)^2) : W[i] = 0
       for j = 2 : n
-        V[i, j] = cos((j - 1)*(i - 1)/N*pi)
+        V[i, j] = cos((j - 1)*(i - 1)*M)
       end
     end
     V[i, n] *= 0.5
     V[i, 1] = 0.5
-    F[i] = f((a + b + cos((i - 1)/N*pi)*h)/2)
+    F[i] = f((a + b + cos((i - 1)*M)*h)/2)
   end
-  return (W'*(V*F))*h/N
+  return (W'*(V*F))[1]*h/(n - 1)
 end

@@ -195,3 +195,23 @@ function gaussian_quadrature(f, a, b; Nf = 16.0)
 
   return approx*h/2
 end
+
+function clenshaw_rule(f, a, b; Nf = 11)
+  V = fill(one(BigFloat), Nf, Nf)
+  F = fill(zero(BigFloat), Nf); W = fill(one(BigFloat), Nf)
+  h = (b - a); N = Nf - 1
+
+  for i = 1 : Nf
+    if i != 1
+      i % 2 != 0 ? W[i] = BigFloat(2)/(BigFloat(1) - (BigFloat(i) - BigFloat(1))^2) : W[i] = zero(BigFloat)
+      for j = 2 : Nf
+        V[i, j] = cos((BigFloat(j) - BigFloat(1))*(BigFloat(i) - BigFloat(1))/N*pi)
+      end
+    end
+    V[i, Nf] *= BigFloat(1)/2
+    V[i, 1] = BigFloat(1)/2
+    F[i] = f((a + b + cos((BigFloat(i) - BigFloat(1))/N*pi)*h)/2)
+  end
+  r = (W'*(V*F))*h/N
+  return r[1]
+end

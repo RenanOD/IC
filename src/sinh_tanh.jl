@@ -7,10 +7,11 @@ function sinh_tanh(f, a, b; n = 6)
 
   for k = h:h:3.7
     qk = exp(-2sinh(k))
-    d = (1 + qk)
-    j = (b - a)*qk/d
-    w = qk*cosh(k)/d^2
-    j > l ? approx += (f(a + j) + f(b - j))*w : approx += (f(a + 2.3e-16) + f(b - 2.3e-16))*w
+    j = (b - a)*qk/(1 + qk)
+    w = qk*cosh(k)/(1 + qk)^2
+    if j > l 
+      approx += (f(a + j) + f(b - j))*w 
+    end
   end
   return approx*2*h*(b - a)
 end
