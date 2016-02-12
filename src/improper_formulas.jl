@@ -83,8 +83,8 @@ function clenshaw_rule(f, a, b, n)
 end
 
 function clenshaw_rule2(f, a, b, n)
-  F = rand(2n - 2)
-  N = n - 1; M = pi/N; h = b - a; w = fill(0.0, n)
+  F = rand(2n - 2); w = fill(0.0, n)
+  N = n - 1; M = pi/N; h = b - a;
   for i = 1 : n
     F[i] = f((a + b + h*cos((i - 1)*M))/2)
     if 1 < i < n
