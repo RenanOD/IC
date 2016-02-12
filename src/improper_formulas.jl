@@ -4,6 +4,7 @@ export simpsons_rule_inf
 export gaussian_quadrature
 export mid_point
 export clenshaw_rule
+export clenshaw_rule2
 
 function zero_to_inf(f; n = 10)
   h = 1/2^n
@@ -79,4 +80,21 @@ function clenshaw_rule(f, a, b, n)
     F[i] = f((a + b + cos((i - 1)*M)*h)/2)
   end
   return (W'*(V*F))[1]*h/(n - 1)
+end
+
+function clenshaw_rule2(f, a, b, n)
+  F = rand(2n - 2)
+  N = n - 1; M = pi/N; h = b - a; w = fill(0.0, n)
+  for i = 1 : n
+    F[i] = f((a + b + h*cos((i - 1)*M))/2)
+    if 1 < i < n
+      F[2n - i] = F[i]
+    end
+    if i % 2 != 0
+      w[i] = 1/(1 - (i - 1)^2)
+    end
+  end
+  g = real(fft(F))
+  A = [g[1]; g[2 : N] + g[2N : -1 : n + 1]; g[n]]
+  return (w'*A)[1]*h/(2N)
 end

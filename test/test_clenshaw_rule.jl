@@ -2,6 +2,8 @@ function test_precision_clenshaw_rule(a,b,g,integral, n)
   exact = integral(b) - integral(a)
   approx = clenshaw_rule(g, a, b, n)
   @test_approx_eq_eps(exact, approx, 1e-10)
+  approx2 = clenshaw_rule2(g, a, b, n)  
+  @test_approx_eq_eps(exact, approx, 1e-10)
 end
 
 function test_clenshaw_rule()
