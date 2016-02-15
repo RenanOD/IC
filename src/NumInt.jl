@@ -1,5 +1,6 @@
 module NumInt
 
+Pkg.clone("https://github.com/ajt60gaibb/FastGaussQuadrature.jl")
 using FastGaussQuadrature
 
 include("closed_formulas.jl")
