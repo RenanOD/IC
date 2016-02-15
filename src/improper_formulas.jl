@@ -1,7 +1,6 @@
 export zero_to_inf
 export double_inf
 export simpsons_rule_inf
-export gaussian_quadrature
 export mid_point
 export clenshaw_rule
 export clenshaw_rule2
@@ -38,22 +37,6 @@ function simpsons_rule_inf(f, a, b; n = 200)
   end
 end
 
-function gaussian_quadrature(f, a, b; n = 10)
-  h = (b - a)/n
-  atemp = a; btemp = a + h
-  approx = 0
-  s = sqrt(3)*h/3
-  x1(atemp, btemp) = (atemp + btemp + s)/2
-  x2(atemp, btemp) = (atemp + btemp - s)/2
-
-  for k = 1 : n
-    approx += (f(x1(atemp, btemp)) + f(x2(atemp, btemp)))
-    atemp += h; btemp += h;
-  end
-
-  return approx*h/2
-end
-
 function mid_point(f, a, b; n = 500)
   h = (b - a)/n
   approx = f(a + h/2)
@@ -84,7 +67,8 @@ end
 
 function clenshaw_rule2(f, a, b, n)
   F = rand(2n - 2); w = fill(0.0, n)
-  N = n - 1; M = pi/N; h = b - a;
+  h = b - a; N = n - 1; M = pi/N
+
   for i = 1 : n
     F[i] = f((a + b + h*cos((i - 1)*M))/2)
     if 1 < i < n
