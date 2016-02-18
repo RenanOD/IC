@@ -48,7 +48,7 @@ end
 
 function clenshaw_rule(f, a, b, n)
   V = fill(1.0, n, n)
-  F = fill(0.0, n); W = fill(1.0, n)
+  F = Float64[]; W = fill(1.0, n)
   h = b - a; M = pi/(n - 1)
 
   for i = 1 : n
@@ -60,25 +60,17 @@ function clenshaw_rule(f, a, b, n)
     end
     V[i, n] *= 0.5
     V[i, 1] = 0.5
-    F[i] = f((a + b + cos((i - 1)*M)*h)/2)
+   push!(F, f((a + b + cos((i - 1)*M)*h)/2))
   end
   return (W'*(V*F))[1]*h/(n - 1)
 end
 
 function clenshaw_rule2(f, a, b, n)
-  F = rand(2n - 2); w = fill(0.0, n)
   h = b - a; N = n - 1; M = pi/N
-
-  for i = 1 : n
-    F[i] = f((a + b + h*cos((i - 1)*M))/2)
-    if 1 < i < n
-      F[2n - i] = F[i]
-    end
-    if i % 2 != 0
-      w[i] = 1/(1 - (i - 1)^2)
-    end
-  end
-  g = real(fft(F))
-  A = [g[1]; g[2 : N] + g[2N : -1 : n + 1]; g[n]]
-  return (w'*A)[1]*h/(2N)
+  x = (a + b + h.*cos((0:N)*M))./2
+  F = map(f, x); W = x*0
+  W[1:2:end] = 1./(1 - (0:2:N).^2)
+  F = real(fft([F[1 : n]; F[n - 1 : -1 : 2]]))
+  F = [F[1]; F[2 : N] + F[2N : -1 : n + 1]; F[n]]
+  return (W'*F)[1]*h/2N
 end
