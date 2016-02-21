@@ -1,12 +1,11 @@
 function test_precision_gauss(g, a, b, exact)
-  approx = gauss_legendre(g, a, b, 128)
-  @test_approx_eq_eps(exact, approx, 5e-16)
-  approx = gauss_lobatto(g, a, b, 128)
-  @test_approx_eq_eps(exact, approx, 5e-16)
+  approx = gauss_legendre(g, a, b, n = 128)
+  @test_approx_eq_eps(exact, approx, 5.0e-16)
+  approx = gauss_lobatto(g, a, b, n = 128)
+  @test_approx_eq_eps(exact, approx, 5.0e-16)
 end
 
 function test_gauss()
-
   g1(t) = t*log(1 + t)
   (a, b) = (0, 1.0)
   exact = 1/4
@@ -22,4 +21,5 @@ function test_gauss()
   exact = e - 1
   test_precision_gauss(g3, a, b, exact)
 end
+
 test_gauss()

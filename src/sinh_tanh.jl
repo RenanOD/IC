@@ -1,9 +1,9 @@
 export sinh_tanh
 
-function sinh_tanh(f, a, b; n = 6)
-  h = 0.5^n
+function sinh_tanh(f::Function, a, b; n::Int = 6)
+  const h = 0.5^n
   approx = f((a + b)/2)/4
-  l = eps(Float64)
+  const l = eps(Float64)
 
   for k = h:h:3.7
     qk = exp(-2sinh(k))
@@ -16,8 +16,8 @@ function sinh_tanh(f, a, b; n = 6)
   return approx*2*h*(b - a)
 end
 
-function sinh_tanh(f, a, b, tol; n = 6)
-  h = 0.5^n
+function sinh_tanh(f::Function, a, b, tol; n::Int = 6)
+  const h = 0.5^n
   approx = f((a + b)/2)/4
   sup = asinh(-log(tol)/2)
   hb = (b - a)
@@ -32,11 +32,11 @@ function sinh_tanh(f, a, b, tol; n = 6)
   return approx*2*h*hb
 end
 
-function sinh_tanh(f, a::BigFloat, b::BigFloat; n = 12)
-  big_one = one(BigFloat)
-  h = (big_one/2)^n
+function sinh_tanh(f::Function, a::BigFloat, b::BigFloat; n::Int = 12)
+  const big_one = one(BigFloat)
+  const h = (big_one/2)^n
   approx = f((a + b)*(big_one/2))*big_one/4
-  l = eps(BigFloat)
+  const l = eps(BigFloat)
 
   for k = h:h:BigFloat(52)/10
     qk = exp(-big_one*2*sinh(k))
@@ -48,11 +48,11 @@ function sinh_tanh(f, a::BigFloat, b::BigFloat; n = 12)
   return approx*big_one*2*h*(b - a)
 end
 
-function sinh_tanh(f, a::BigFloat, b::BigFloat, lim::BigFloat; n = 12)
-  big_one = one(BigFloat)
-  h = (big_one/2)^n
+function sinh_tanh(f::Function, a::BigFloat, b::BigFloat, lim::BigFloat; n::Int = 12)
+  const big_one = one(BigFloat)
+  const h = (big_one/2)^n
   approx = f((a + b)*big_one/2)*big_one/4
-  sup = asinh(-log(lim)/2)
+  const sup = asinh(-log(lim)/2)
 
   for k = h:h:sup
     qk = exp(-big_one*2*sinh(k))
@@ -61,5 +61,5 @@ function sinh_tanh(f, a::BigFloat, b::BigFloat, lim::BigFloat; n = 12)
     w = qk*cosh(k)/d^(big_one*2)
     approx += (f(a + j) + f(b - j))*w
   end
-  return approx*big_one*2*h*(b - a)
+  return approx*2*h*(b - a)
 end

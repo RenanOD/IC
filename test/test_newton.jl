@@ -1,34 +1,34 @@
 function test_precision_trapezoidal(a, b, g, integral)
   exact = integral(b) - integral(a)
-  approx = trapezoidal_rule(g, a, b, n = 1e6)
-  @test_approx_eq_eps(exact, approx, 1e-10)
+  approx = trapezoidal_rule(g, a, b, n = 10^6)
+  @test_approx_eq_eps(exact, approx, 1.0e-10)
 end
 
 function test_precision_simpsons(a, b, g, integral)
   exact = integral(b) - integral(a)
-  approx = simpsons_rule(g, a, b, n = 1e6)
-  @test_approx_eq_eps(exact, approx, 1e-12)
-end
-
-function test_precision_midpoint(a, b, g, integral)
-  exact = integral(b) - integral(a)
-  approx = midpoint_rule(g, a, b, n = 1e6)
-  @test_approx_eq_eps(exact, approx, 1e-10)
+  approx = simpsons_rule(g, a, b, n = 10^6)
+  @test_approx_eq_eps(exact, approx, 1.0e-12)
 end
 
 function test_precision_simpsons_2(a, b, g, integral)
   exact = integral(b) - integral(a)
-  approx = simpsons_rule(g, a, b, n = 1e6-1)
-  @test_approx_eq_eps(exact, approx, 1e-12)
+  approx = simpsons_rule(g, a, b, n = 10^6 - 1)
+  @test_approx_eq_eps(exact, approx, 1.0e-12)
+end
+
+function test_precision_midpoint(a, b, g, integral)
+  exact = integral(b) - integral(a)
+  approx = midpoint_rule(g, a, b, n = 10^6)
+  @test_approx_eq_eps(exact, approx, 1.0e-10)
 end
 
 function test_precision_romberg(a, b, g, integral)
   exact = integral(b) - integral(a)
-  approx = romberg_rule(g, a, b, 256)
-  @test_approx_eq_eps(exact, approx, 1e-12)
+  approx = romberg_rule(g, a, b, n = 256)
+  @test_approx_eq_eps(exact, approx, 1.0e-12)
 end
 
-function test_closed_formulas()
+function test_newton()
   b = 1
   for a = -1:0
 
@@ -63,4 +63,4 @@ function test_closed_formulas()
   end
 end
 
-test_closed_formulas()
+test_newton()

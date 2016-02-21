@@ -1,11 +1,11 @@
 function test_precision_simple(g, a, b, exact)
   approx=sinh_tanh(g, a, b, n = 6)
-  @test_approx_eq_eps(exact, approx, 5e-8)
+  @test_approx_eq_eps(exact, approx, 5.0e-8)
 end
 
 function test_precision_big(g, a, b, exact)
   approx=sinh_tanh(g, a, b, n = 12)
-  @test_approx_eq_eps(exact, approx, 1e-60)
+  @test_approx_eq_eps(exact, approx, 1.0e-60)
 end
 
 function test_precision_lim(g, a, b, exact, lim)
@@ -14,7 +14,6 @@ function test_precision_lim(g, a, b, exact, lim)
 end
 
 function test_sinh_tanh_simple()
-
   g1(t) = t*log(1 + t)
   (a, b) = (0, 1.0)
   exact = 1/4
@@ -42,7 +41,6 @@ function test_sinh_tanh_simple()
 end
 
 function test_sinh_tanh_big()
-
   g1(t) = t*log(one(BigFloat) + t)
   (a, b) = (zero(BigFloat), one(BigFloat))
   exact = one(BigFloat)/4
@@ -53,7 +51,7 @@ function test_sinh_tanh_big()
   exact = (BigFloat(pi) - BigFloat(2) + log(BigFloat(4)))/12
   test_precision_big(g2, a, b, exact)
 
-  g3(t) = e^t*cos(t)
+  g3(t) = exp(t)*cos(t)
   (a, b) = (zero(BigFloat), BigFloat(pi)/2)
   exact = (exp(BigFloat(pi)/2) - one(BigFloat))/2
   test_precision_big(g3, a, b, exact)
@@ -65,7 +63,6 @@ function test_sinh_tanh_big()
 end
 
 function test_sinh_tanh_lim()
-
   lim = parse(BigFloat, "1e-45")
 
   g1(t) = t*log(one(BigFloat) + t)
