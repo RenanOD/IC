@@ -37,22 +37,8 @@ end
 
 function romberg_rule(f, a, b, n)
   const h = (b - a)/n
-  x = [a + i*h for i = 0 : n]
-  F = map(f, x)
-  r = 1 + Int(log(2, n))
-  I = Float64[]
-  const si = (F[1] + F[n + 1])/2
-
-  for i = 1 : r
-    s = si
-    nn = 2^(i - 1)
-    d = div(n, nn)
-    for k = 1 : nn - 1
-      s += F[1 + k*d]
-    end
-    push!(I, s*(b - a)/nn)
-  end
-  
+  const r = 1 + Int(log(2, n))
+  I = [trapezoidal_rule(f, a, b, n = 2^i) for i = 0 : r - 1]
   for i = 1 : r - 1
     I = [I[j + 1] + (I[j + 1] - I[j])/(4^i - 1) for j = 1 : r - i]
   end
