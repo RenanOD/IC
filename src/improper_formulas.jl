@@ -1,7 +1,6 @@
 export zero_to_inf
 export double_inf
 export simpsons_rule_inf
-export mid_point
 export clenshaw_rule
 export clenshaw_rule2
 
@@ -37,15 +36,6 @@ function simpsons_rule_inf(f, a, b; n = 200)
   end
 end
 
-function mid_point(f, a, b; n = 500)
-  h = (b - a)/n
-  approx = f(a + h/2)
-  for i = 1 : n - 1
-    approx += f(a + h/2 + i*h)
-  end
-  return h*approx
-end
-
 function clenshaw_rule(f, a, b, n)
   V = fill(1.0, n, n)
   F = Float64[]; W = fill(1.0, n)
@@ -66,8 +56,8 @@ function clenshaw_rule(f, a, b, n)
 end
 
 function clenshaw_rule2(f, a, b, n)
-  h = b - a; N = n - 1; M = pi/N
-  x = (a + b + h.*cos((0:N)*M))./2
+  const h = b - a; const N = n - 1; const M = pi/N
+  x = [(a + b + h*cos(k*M))/2 for k = 0 : N]
   F = map(f, x); W = x*0
   W[1:2:end] = 1./(1 - (0:2:N).^2)
   F = real(fft([F[1 : n]; F[n - 1 : -1 : 2]]))
