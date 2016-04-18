@@ -1,0 +1,15 @@
+1: exp(x) [0,1]
+
+2: sin(x) [0,pi/2]
+
+3: 1/(x^2+1) [-1,1]
+
+4: exp(x)*cos(x) [0,pi/2]
+
+5: x^2*atan(x) [0,1]
+
+6: sqrt(x)*log(x) [0,1]
+
+7: sqrt(x)/sqrt(1+x^2) [0,1]
+
+8: log(x+2exp(2))*erf(2pi*x) [-2exp(2),1-2exp(2)]

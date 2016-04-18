@@ -1,15 +1,18 @@
 function sinh_tanh(f, a, b; Nf = 2^5)
+  a=BigFloat(a)
+  b=BigFloat(b)
 
-  h = 9.0/(Nf - 1)
+  big_one = one(BigFloat)
+  h = parse(BigFloat, "10.6")/(Nf - 1)
   nt = 0
 
-  q(k) = e^(-2*sinh(k))
-  subs(k) = (b - a)*q(k)/(1 + q(k))
-  g(k) = 2*(b - a)*q(k)*cosh(k)/(1 + q(k))^2
-  approx = f((a + b)/2)*g(0)*h
+  q(k) = e^(-big_one*2*sinh(k))
+  subs(k) = (b - a)*q(k)/(big_one + q(k))
+  g(k) = 2(b - a)*q(k)*cosh(k)/(big_one + q(k))^2
+  approx = f((a + b)/2)*g(zero(BigFloat))*h
   nt+=1
 
-  for k = h:h:4.5
+  for k = h:h:big_one*parse(BigFloat, "5.3")
     j = subs(k)
     dxdt = g(k)
     f1 = f(a + j)
@@ -33,7 +36,7 @@ end
 function sinh_tanh(f, a::BigFloat, b::BigFloat; Nf = 2^5)
  
   big_one = one(BigFloat)
-  h = parse(BigFloat, "10.4")/(Nf - 1)
+  h = parse(BigFloat, "10")/(Nf - 1)
   nt = 0
 
   q(k) = e^(-big_one*2*sinh(k))
@@ -42,7 +45,7 @@ function sinh_tanh(f, a::BigFloat, b::BigFloat; Nf = 2^5)
   approx = f((a + b)/2)*g(zero(BigFloat))*h
   nt+=1
 
-  for k = h:h:big_one*parse(BigFloat, "5.2")
+  for k = h:h:big_one*parse(BigFloat, "5")
     j = subs(k)
     dxdt = g(k)
     f1 = f(a + j)
@@ -196,22 +199,49 @@ function gaussian_quadrature(f, a, b; Nf = 16.0)
   return approx*h/2
 end
 
-function clenshaw_rule(f, a, b; Nf = 11)
-  V = fill(one(BigFloat), Nf, Nf)
-  F = fill(zero(BigFloat), Nf); W = fill(one(BigFloat), Nf)
-  h = (b - a); N = Nf - 1
+function clenshaw_rule(f::Function, a, b; Nf::Int = 16)
+  V = fill(1.0, Nf, Nf)
+  F = Float64[]; W = fill(1.0, Nf)
+  const h = b - a; const M = pi/(Nf - 1)
 
   for i = 1 : Nf
     if i != 1
-      i % 2 != 0 ? W[i] = BigFloat(2)/(BigFloat(1) - (BigFloat(i) - BigFloat(1))^2) : W[i] = zero(BigFloat)
+      i % 2 != 0 ? W[i] = 2/(1 - (i - 1)^2) : W[i] = 0
       for j = 2 : Nf
-        V[i, j] = cos((BigFloat(j) - BigFloat(1))*(BigFloat(i) - BigFloat(1))/N*pi)
+        V[i, j] = cos((j - 1)*(i - 1)*M)
       end
     end
-    V[i, Nf] *= BigFloat(1)/2
-    V[i, 1] = BigFloat(1)/2
-    F[i] = f((a + b + cos((BigFloat(i) - BigFloat(1))/N*pi)*h)/2)
+    V[i, Nf] *= 0.5
+    V[i, 1] = 0.5
+   push!(F, f((a + b + cos((i - 1)*M)*h)/2))
   end
-  r = (W'*(V*F))*h/N
-  return r[1]
+  return (W'*(V*F))[1]*h/(Nf - 1)
+end
+
+function clenshaw_rule(f::Function, a::BigFloat, b::BigFloat; Nf::Int = 16)
+  V = fill(one(BigFloat), Nf, Nf)
+  F = BigFloat[]; W = fill(one(BigFloat), Nf)
+  const h = b - a; const M = pi/(BigFloat(Nf) - one(BigFloat))
+
+  for i = 1 : Nf
+    if i != 1
+      i % 2 != 0 ? W[i] = one(BigFloat)*2/(one(BigFloat) - (i - one(BigFloat))^2) : W[i] = zero(BigFloat)
+      for j = 2 : Nf
+        V[i, j] = cos((BigFloat(j) - one(BigFloat))*(BigFloat(i) - one(BigFloat))*M)
+      end
+    end
+    V[i, Nf] *= 0.5
+    V[i, 1] = 0.5
+   push!(F, f((a + b + cos((i - one(BigFloat))*M)*h)/2))
+  end
+  return (W'*(V*F))[1]*h/(BigFloat(Nf) - one(BigFloat))
+end
+
+function gauss_legendre(f::Function, a, b; Nf::Int = 16)
+  (F, W) = gausslegendre(Nf)
+  const h = b - a
+  for i = 1 : Nf
+    F[i] = f((a + b + h*F[i])/2)
+  end
+  return (F'*W)[1]*h/2
 end
