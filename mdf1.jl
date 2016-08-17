@@ -61,3 +61,10 @@ function heat_exp(u0, t0, tf, L, k, M)
 
 	return U
 end
+
+function example(tf, M)
+
+        u0=[100.0 20.0 20.0 20.0 20.0 25.0]
+        return heat_exp(u0, 0, tf, 0.05, 1.54e-5, M)
+end
+
